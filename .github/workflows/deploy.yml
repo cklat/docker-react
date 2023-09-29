@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Build Docker Image and Test
       run: |
         docker build -t cklat/docker-react -f Dockerfile.dev .
@@ -25,6 +25,7 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
         application_name: docker-react
         environment_name: docker-react-env
-        version_label: 12345
+        existing_bucket_name: elasticbeanstalk-us-east-1-433509635830
+        version_label: ${{ github.sha }}
         region: us-east-1
         deployment_package: deploy.zip
