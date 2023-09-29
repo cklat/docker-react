@@ -10,8 +10,9 @@ jobs:
     steps:
     - name: Build Docker Image and Test
       uses: actions/checkout@v3
-      run: docker build -t cklat/docker-react -f Dockerfile.dev .
-      run: docker run -e CI=true cklat/docker-react npm test
+      run:  |
+        docker build -t cklat/docker-react -f Dockerfile.dev .
+        docker run -e CI=true cklat/docker-react npm test
       
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
